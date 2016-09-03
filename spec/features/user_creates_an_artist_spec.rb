@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "User submits a new artist" do
-  # As a user
+
   # When I visit the artists index
   # And I click "new Artist"
   # And I fill in the name
@@ -9,7 +9,6 @@ RSpec.feature "User submits a new artist" do
   # And I click "Create Artist"
   # Then I shoud see the artist name and image on the page
   scenario "they see the page for the individual artist" do
-    skip
     artist_name         = "Bob Marley"
     artist_image_path   = "http://cps-static.rovicorp.com/3/JPG_400/MI0003/146/MI0003146038.jpg"
 
@@ -33,8 +32,8 @@ RSpec.feature "User submits a new artist" do
     scenario "they see an error message" do
       artist_image_path = "http://cps-static.rovicorp.com/3/JPG_400?MI0003/146/MI0003146038.jpg"
 
-      visit artist_path
-      click "New Artist"
+      visit artists_path
+      click_on "New Artist"
       fill_in "artist_image_path", with: artist_image_path
       click_on "Create Artist"
 
