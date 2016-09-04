@@ -60,7 +60,7 @@ RSpec.feature "User submits a new artist" do
 
       click_on "Bob Marley"
 
-      expect(page).to have_content "Artist: Bob Marley"
+      expect(page).to have_content "Bob Marley"
       expect(page).to have_css("img[src=\"#{artist_image_path}\"]")
     end
 
@@ -72,7 +72,7 @@ RSpec.feature "User submits a new artist" do
       fill_in "artist_name", with: "Jerry Garcia"
       click_on "Update Artist"
 
-      expect(page).to have_content "Artist: Jerry Garcia"
+      expect(page).to have_content "Jerry Garcia"
       expect(page).to have_css "img[src=\"#{artist_image_path}\"]"
     end
 
