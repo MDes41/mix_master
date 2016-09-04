@@ -3,10 +3,15 @@ Rails.application.routes.draw do
   root "artists#index"
 
   resources :artists do
-    resources :songs, shallow: true
+    resources :songs, only: [:create, :new]
+    get '/songs', to: "songs#artist_index"
   end
 
-  
+  resources :songs, only: [:index, :destroy, :update, :show, :edit]
+
+
+
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,7 +1,12 @@
 class SongsController < ApplicationController
 
+  def artist_index
+    @artist = Artist.find(params[:artist_id])
+    @songs = @artist.songs.sort.reverse
+  end
+
   def index
-    @songs = Artist.find(params[:artist_id]).songs.sort.reverse
+    @songs = Song.all.sort.reverse
   end
 
   def new
@@ -30,6 +35,13 @@ class SongsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @song = Song.find(params[:id])
+    @song.destroy
+    @back_url = URI(request.referer).path
+    redirect_to @back_url
   end
 
   def song_params

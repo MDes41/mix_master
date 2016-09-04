@@ -1,8 +1,8 @@
-<h1>All Songs</h1>
+<h1>All Songs for <%= @artist.name %></h1>
 
 <ul>
 <% @songs.each do |song| %>
   <li><%= link_to song.title, song_path(song) %> - <%= link_to "Delete",  song_path(song), method: :delete %></li>
 <% end %>
 </ul>
-<p><%= link_to "<< All Artist", artists_path %></p>
+<p><%= link_to "Back to #{@artist.name}", artist_path(@artist) %></p>
