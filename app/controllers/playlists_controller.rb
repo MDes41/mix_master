@@ -8,6 +8,18 @@ class PlaylistsController < ApplicationController
     @songs = Song.all
   end
 
+  def edit
+    @playlist = Playlist.find(params[:id])
+    @songs = Song.all
+  end
+
+  def update
+    @playlist = Playlist.find(params[:id])
+    @playlist.update(playlist_params)
+
+    redirect_to @playlist
+  end
+
   def create
     @playlist = Playlist.create(playlist_params)
     redirect_to @playlist
