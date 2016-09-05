@@ -44,11 +44,13 @@ class SongsController < ApplicationController
     redirect_to @back_url
   end
 
-  def song_params
-    params.require(:song).permit(:title)
-  end
-
   def show
     @song = Song.find(params[:id])
+  end
+
+  private
+
+  def song_params
+    params.require(:song).permit(:title)
   end
 end
