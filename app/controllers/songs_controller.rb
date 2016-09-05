@@ -1,21 +1,20 @@
 class SongsController < ApplicationController
-
-  def artist_index
-    @artist = Artist.find(params[:artist_id])
-    @songs = @artist.songs.sort.reverse
-  end
+  before_action :set_song, only: [:show, :edit, :update, :destroy]
+  before_action :set_artist, only: [:artist_index, :new, :create]
 
   def index
     @songs = Song.all.sort.reverse
   end
 
+  def artist_index
+    @songs = @artist.songs.sort.reverse
+  end
+
   def new
-    @artist = Artist.find(params[:artist_id])
     @song = @artist.songs.new
   end
 
   def create
-    @artist = Artist.find(params[:artist_id])
     @song = @artist.songs.new(song_params)
     if @song.save
       redirect_to song_path(@song)
@@ -24,12 +23,13 @@ class SongsController < ApplicationController
     end
   end
 
+  def show
+  end
+
   def edit
-    @song = Song.find(params[:id])
   end
 
   def update
-    @song = Song.find(params[:id])
     if @song.update(song_params)
       redirect_to song_path(@song)
     else
@@ -38,17 +38,20 @@ class SongsController < ApplicationController
   end
 
   def destroy
-    @song = Song.find(params[:id])
     @song.destroy
     @back_url = URI(request.referer).path
     redirect_to @back_url
   end
 
-  def show
-    @song = Song.find(params[:id])
+  private
+
+  def set_artist
+    @artist = Artist.find(params[:artist_id])
   end
 
-  private
+  def set_song
+    @song = Song.find(params[:id])
+  end
 
   def song_params
     params.require(:song).permit(:title)

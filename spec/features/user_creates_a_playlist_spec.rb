@@ -1,6 +1,19 @@
 require "rails_helper"
 
 RSpec.feature "User creates a playlist" do
+
+  scenario "they see an error if the don't fill out name" do
+    artist_1 = create(:artist)
+    song_one, song_two, song_three = create_list(:song, 3, :artist_id => artist_1.id)
+    visit playlists_path
+    click_on "New Playlist"
+    check("song-#{song_one.id}")
+    check("song-#{song_three.id}")
+    click_on "Create Playlist"
+
+    expect(page).to have_content "Name can't be blank"
+  end
+
   scenario "they see the page for the indivicual playlist" do
     artist_1 = create(:artist)
     song_one, song_two, song_three = create_list(:song, 3, :artist_id => artist_1.id)

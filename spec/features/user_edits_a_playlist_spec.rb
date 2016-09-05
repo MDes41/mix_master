@@ -1,6 +1,22 @@
 require 'rails_helper'
 
 RSpec.feature "User edits a playlist" do
+
+  scenario "when user updates a playlist without a name they get an error message" do
+    playlist = create(:playlist)
+    song_1 = playlist.songs.create(attributes_for(:song))
+    song_2 = create(:song)
+
+    visit playlist_path(playlist)
+
+    click_on "Edit"
+    fill_in "playlist_name", with: ""
+    check("song-#{song_2.id}")
+    click_on "Update Playlist"
+
+    expect(page).to have_content "Name can't be blank"
+  end
+
   scenario "when a user adds a new song and delete another they should see the updated playlist" do
     playlist = create(:playlist)
     song_1 = playlist.songs.create(attributes_for(:song))
