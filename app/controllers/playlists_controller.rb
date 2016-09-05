@@ -1,5 +1,6 @@
 class PlaylistsController < ApplicationController
   def index
+    @playlists = Playlist.all.sort.reverse
   end
 
   def new

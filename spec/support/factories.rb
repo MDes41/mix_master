@@ -15,6 +15,17 @@ FactoryGirl.define do
     "#{n} Title"
   end
 
+
+  factory :playlist do
+    sequence :name do |n|
+      "Playlist #{n}"
+    end
+
+    factory :playlist_with_songs do
+      songs { create_list(:song, 3)}
+    end
+  end
+
   factory :song do
     title
     artist
