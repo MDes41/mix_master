@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   resources :songs, only: [:index, :destroy, :update, :show, :edit]
   resources :playlists, only: [:index, :new, :create, :show, :edit, :update, :destroy]
 
+  get '/auth/spotify/callback', to: 'sessions#create'
 
+  delete "/logout", to: "sessions#destroy"
 
 
 
