@@ -7,5 +7,6 @@ RSpec.feature "User can delete a playlist" do
     click_on "Delete"
 
     expect(page).to have_content "All Playlists"
+    expect(page).to_not have_content playlist.name
   end
 end
